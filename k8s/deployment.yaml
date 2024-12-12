@@ -16,5 +16,6 @@ spec:
       containers:
       - name: joke-fetcher
         image: joke-fetcher:latest
+        imagePullPolicy: Never
         ports:
         - containerPort: 5000
