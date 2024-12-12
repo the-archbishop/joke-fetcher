@@ -42,17 +42,16 @@ kubectl logs -n joke-fetcher -l app=joke-fetcher --tail=100 -f
 
 ### Example Log Output
 ```
-2024-12-12 16:33:09,312 - START: joke fetcher
-
-2024-12-12 16:33:09,466 - Here's one for ya...
-
-2024-12-12 16:33:09,466 - I can't tell if i like this blender... ... It keeps giving me mixed results.
-
-2024-12-12 16:33:09,466 - SLEEP: 5 mintues
-
-2024-12-12 16:38:09,708 - Here's one for ya...
-
-2024-12-12 16:38:09,708 - Why did the octopus beat the shark in a fight? ... Because it was well armed.
-
-2024-12-12 16:38:09,708 - SLEEP: 5 mintues
+2024-12-12 19:06:47,811 - START: joke fetcher
+2024-12-12 19:06:47,811 - HEALTH CHECK: Successfully wrote to /tmp/healthy
+2024-12-12 19:06:47,964 - Here's one for ya...
+2024-12-12 19:06:47,964 - What do you do when you see a space man? ... Park your car, man.
+2024-12-12 19:06:47,965 - SLEEP: 5 minutes
+2024-12-12 19:07:17,811 - HEALTH CHECK: Successfully wrote to /tmp/healthy
+...
+2024-12-12 19:11:48,055 - HEALTH CHECK: Successfully wrote to /tmp/healthy
+2024-12-12 19:11:48,179 - Here's one for ya...
+2024-12-12 19:11:48,179 - What did the mountain climber name his son? ... Cliff.
+2024-12-12 19:11:48,179 - SLEEP: 5 minutes
+2024-12-12 19:12:18,085 - HEALTH CHECK: Successfully wrote to /tmp/healthy
 ```

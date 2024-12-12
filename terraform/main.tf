@@ -1,24 +1,29 @@
-provider "kubernetes" {
+terraform {
+  required_providers {
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "~> 1.14.0"
+    }
+  }
+}
+
+provider "kubectl" {
   config_path = "~/.kube/config"
 }
 
 # Create the namespace
-resource "kubernetes_namespace" "joke_fetcher" {
-  metadata {
-    name = "joke-fetcher"
-  }
+resource "kubectl_manifest" "joke_fetcher" {
+  yaml_body = file("${path.module}/../k8s/namespace.yaml")
 }
 
 # Apply the Deployment YAML
-resource "kubernetes_manifest" "joke_fetcher_deployment" {
-  manifest = yamldecode(file("${path.module}/../k8s/deployment.yaml"))
-
-  depends_on = [kubernetes_namespace.joke_fetcher]
+resource "kubectl_manifest" "joke_fetcher_deployment" {
+  yaml_body = file("${path.module}/../k8s/deployment.yaml")
 }
 
 # Apply the Service YAML
-resource "kubernetes_manifest" "joke_fetcher_service" {
-  manifest = yamldecode(file("${path.module}/../k8s/service.yaml"))
+resource "kubectl_manifest" "joke_fetcher_service" {
+  yaml_body = file("${path.module}/../k8s/service.yaml")
 
-  depends_on = [kubernetes_namespace.joke_fetcher]
+  depends_on = [kubectl_manifest.joke_fetcher]
 }

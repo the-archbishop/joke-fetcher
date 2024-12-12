@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: joke-fetcher
   namespace: joke-fetcher
+  annotations:
+    description: "Deployment for fetching and logging jokes every 5 minutes."
 spec:
   replicas: 1
   selector:
@@ -19,3 +21,17 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
+      livenessProbe:
+        exec:
+          command:
+          - cat
+          - /tmp/healthy
+        initialDelaySeconds: 10
+        periodSeconds: 5
+      readinessProbe:
+        exec:
+          command:
+          - cat
+          - /tmp/healthy
+        initialDelaySeconds: 5
+        periodSeconds: 5
