@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: joke-fetcher
+  namespace: joke-fetcher
 spec:
   selector:
     app: joke-fetcher

@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: joke-fetcher
+  namespace: joke-fetcher
 spec:
   replicas: 1
   selector:
@@ -15,4 +16,5 @@ spec:
       containers:
       - name: joke-fetcher
         image: joke-fetcher:latest
-        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
