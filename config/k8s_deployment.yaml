@@ -6,7 +6,7 @@ metadata:
   annotations:
     description: "Deployment for fetching and logging jokes every 5 minutes."
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: joke-fetcher

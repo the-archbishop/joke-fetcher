@@ -5,6 +5,7 @@ This application is a Python-based service that fetches random jokes every 5 min
 ## Requirements
 - Docker
 - Kubernetes
+- Helm
 - Terraform
 - Python 3.9 or higher
   

@@ -1,29 +1,39 @@
 terraform {
   required_providers {
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.16"
+    }
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = "~> 1.14.0"
     }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.4"
+    }
+    kind = {
+      source  = "kyma-project/kind"
+      version = "~> 1.0"
+    }
   }
+}
+
+provider "kubernetes" {
+  config_path = "~/.kube/config"
 }
 
 provider "kubectl" {
   config_path = "~/.kube/config"
 }
 
-# Create the namespace
-resource "kubectl_manifest" "joke_fetcher" {
-  yaml_body = file("${path.module}/../k8s/namespace.yaml")
+provider "helm" {
+  kubernetes {
+    config_path = "~/.kube/config"
+  }
 }
 
-# Apply the Deployment YAML
-resource "kubectl_manifest" "joke_fetcher_deployment" {
-  yaml_body = file("${path.module}/../k8s/deployment.yaml")
-}
-
-# Apply the Service YAML
-resource "kubectl_manifest" "joke_fetcher_service" {
-  yaml_body = file("${path.module}/../k8s/service.yaml")
-
-  depends_on = [kubectl_manifest.joke_fetcher]
+provider "kind" {
+  cluster_name    = "karpenter-test"
+  kubeconfig_path = "~/.kube/config"
 }

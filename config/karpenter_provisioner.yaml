@@ -1,0 +1,14 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default
+spec:
+  requirements:
+    - key: "kubernetes.io/arch"
+      operator: In
+      values: ["amd64"]
+  limits:
+    resources:
+      cpu: "4"
+      memory: "8Gi"
+  ttlSecondsAfterEmpty: 30
