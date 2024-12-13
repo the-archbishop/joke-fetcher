@@ -22,7 +22,7 @@ spec:
       serviceAccountName: karpenter
       containers:
       - name: karpenter
-        image: public.ecr.aws/karpenter/controller:v0.16.3
+        image: public.ecr.aws/karpenter/controller:1.0.8
         ports:
         - containerPort: 8080
         env:
@@ -32,6 +32,10 @@ spec:
           value: docker-desktop
         - name: CLUSTER_ENDPOINT
           value: https://kubernetes.docker.internal:6443
+        - name: SYSTEM_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         resources:
           requests:
             memory: "256Mi"
