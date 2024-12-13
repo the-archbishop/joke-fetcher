@@ -5,6 +5,10 @@ metadata:
   namespace: karpenter
   labels:
     app: karpenter
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: karpenter
+    meta.helm.sh/release-namespace: karpenter
 spec:
   replicas: 1
   selector:
@@ -25,9 +29,9 @@ spec:
         - name: AWS_REGION
           value: us-west-2
         - name: CLUSTER_NAME
-          value: docker-desktop-cluster
+          value: docker-desktop
         - name: CLUSTER_ENDPOINT
-          value: https://localhost:6443
+          value: https://kubernetes.docker.internal:6443
         resources:
           requests:
             memory: "256Mi"
