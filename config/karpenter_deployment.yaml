@@ -27,7 +27,7 @@ spec:
         - containerPort: 8080
         env:
         - name: AWS_REGION
-          value: us-west-2
+          value: us-east-1
         - name: CLUSTER_NAME
           value: docker-desktop
         - name: CLUSTER_ENDPOINT
@@ -36,6 +36,16 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials
+              key: AWS_SECRET_ACCESS_KEY
         resources:
           requests:
             memory: "256Mi"

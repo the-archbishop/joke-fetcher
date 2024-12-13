@@ -39,3 +39,6 @@ terraform.rc
 # Python
 *.pyc
 __pycache__/
+
+# Secrets
+karpenter_secrets.yaml

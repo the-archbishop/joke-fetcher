@@ -3,6 +3,8 @@ kind: Provisioner
 metadata:
   name: default
 spec:
+  provider:
+      instanceProfile: karpenter-node-role
   requirements:
     - key: "kubernetes.io/arch"
       operator: In
