@@ -6,7 +6,7 @@ spec:
   requirements:
     - key: "kubernetes.io/arch"
       operator: In
-      values: ["amd64"]
+      values: ["amd64", "arm64"]
   limits:
     resources:
       cpu: "4"

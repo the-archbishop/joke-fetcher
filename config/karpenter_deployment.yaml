@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karpenter
+  namespace: karpenter
+  labels:
+    app: karpenter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karpenter
+  template:
+    metadata:
+      labels:
+        app: karpenter
+    spec:
+      serviceAccountName: karpenter
+      containers:
+      - name: karpenter
+        image: public.ecr.aws/karpenter/controller:v0.16.3
+        ports:
+        - containerPort: 8080
+        env:
+        - name: AWS_REGION
+          value: us-west-2
+        - name: CLUSTER_NAME
+          value: docker-desktop-cluster
+        - name: CLUSTER_ENDPOINT
+          value: https://localhost:6443
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
