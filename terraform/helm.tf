@@ -13,18 +13,13 @@ resource "helm_release" "karpenter" {
   }
 
   set {
-    name  = "serviceAccount.name"
-    value = "karpenter"
-  }
-
-  set {
     name  = "clusterName"
-    value = "local-cluster"
+    value = "docker-desktop-cluster"
   }
 
   set {
     name  = "clusterEndpoint"
-    value = kubernetes_cluster.kubernetes.endpoint
+    value = "http://localhost:6443"  # Docker Desktop
   }
 
   set {
