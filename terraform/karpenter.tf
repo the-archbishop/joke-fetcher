@@ -15,3 +15,11 @@ resource "kubectl_manifest" "karpenter_deployment" {
 
   depends_on = [kubectl_manifest.karpenter_service_account]
 }
+
+resource "kubectl_manifest" "karpenter_crd_nodeclaims" {
+  yaml_body = file("${path.module}/../config/karpenter_nodeclaims.yaml")
+}
+
+resource "kubectl_manifest" "karpenter_crd_nodepools" {
+  yaml_body = file("${path.module}/../config/karpenter_nodepools.yaml")
+}
